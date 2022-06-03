@@ -121,6 +121,16 @@ mutation RefreshAuthToken {
 }
 ```
 
+### Refresh cookies on login
+
+Send a refresh cookie when the user login to the client with httpOnly and secure
+
+Activate and define the front domain like so :
+```
+define( 'GRAPHQL_JWT_AUTH_SET_COOKIES', true ); // or false
+define( 'GRAPHQL_JWT_FRONT_DOMAIN', 'your-front' );
+```
+
 ## Filters
 
 The plugin offers some filters to hook into.
