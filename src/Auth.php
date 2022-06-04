@@ -12,6 +12,7 @@ class Auth
 	protected static $issued;
 	protected static $expiration;
 	protected static $is_refresh_token = false;
+	protected static $refresh_token_expiration = 30;
 
 	/**
 	 * This returns the secret key, using the defined constant if defined, and passing it through a filter to
@@ -358,7 +359,7 @@ class Auth
 				 * token to be valid without changing as long as it has not been revoked or otherwise invalidated,
 				 * such as a refreshed user secret.
 				 */
-				$token['exp']                         = apply_filters('graphql_jwt_auth_refresh_token_expiration', (self::get_token_issued() + (DAY_IN_SECONDS * 365)));
+				$token['exp']                         = apply_filters('graphql_jwt_auth_refresh_token_expiration', (self::get_token_issued() + (DAY_IN_SECONDS * self::$refresh_token_expiration)));
 				$token['data']['user']['user_secret'] = $secret;
 
 				self::$is_refresh_token = false;
